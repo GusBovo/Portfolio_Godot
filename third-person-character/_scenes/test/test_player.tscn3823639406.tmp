@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://0aywpfwob1xd"]
+
+[ext_resource type="Script" uid="uid://fhoiykuysb85" path="res://_source/player.gd" id="1_l06f1"]
+[ext_resource type="Script" uid="uid://b8slk72psp6pc" path="res://_source/cam_inner_arm.gd" id="2_3h60n"]
+[ext_resource type="Script" uid="uid://bx8tt7dlr1h0y" path="res://_source/camera.gd" id="2_iaswp"]
+[ext_resource type="Script" uid="uid://vfaunxwsbym" path="res://_source/cam_outer_spring_arm.gd" id="2_w5kw1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ic42l"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n7yp6"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_l06f1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ic42l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_n7yp6")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+enabled = false
+target_position = Vector3(2.25, 0.4, 0)
+script = ExtResource("2_3h60n")
+
+[node name="OuterSpringArm3D" type="SpringArm3D" parent="RayCast3D"]
+spring_length = 2.0
+script = ExtResource("2_w5kw1")
+
+[node name="Camera3D" type="Camera3D" parent="RayCast3D/OuterSpringArm3D"]
+current = true
+script = ExtResource("2_iaswp")

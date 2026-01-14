@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://losq5ei8rqc8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_35apf"]
+albedo_color = Color(0.68431956, 0.0003526059, 0.68431485, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ui0bx"]
+material = SubResource("StandardMaterial3D_35apf")
+size = Vector3(2, 0.25, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ulewo"]
+size = Vector3(2, 0.25, 1)
+
+[node name="0_25_Wall" type="StaticBody3D"]
+collision_layer = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ui0bx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_ulewo")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.50169957)
+text = "0,25M"
+font_size = 35

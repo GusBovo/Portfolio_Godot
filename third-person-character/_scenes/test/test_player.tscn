@@ -1,0 +1,106 @@
+[gd_scene load_steps=19 format=3 uid="uid://0aywpfwob1xd"]
+
+[ext_resource type="Script" uid="uid://fhoiykuysb85" path="res://_source/player/player.gd" id="1_l06f1"]
+[ext_resource type="Script" uid="uid://dfgsnqkobbv4l" path="res://_source/player/camera_system/camera_system.gd" id="2_q5ykm"]
+[ext_resource type="Script" uid="uid://dxvik57mgyyv6" path="res://_source/player/player_state_machine/player_state_machine.gd" id="3_kol0q"]
+[ext_resource type="Script" uid="uid://dmw5g5hvu5nmk" path="res://_source/player/player_state_machine/states/idle.gd" id="4_vxt7l"]
+[ext_resource type="Script" uid="uid://blikuo7wwp8cd" path="res://_source/player/player_state_machine/states/walk.gd" id="5_af48h"]
+[ext_resource type="Script" uid="uid://dpi5j2tolfhl6" path="res://_source/player/player_state_machine/states/sprint.gd" id="6_v6at5"]
+[ext_resource type="Script" uid="uid://bmxcf5py0t36d" path="res://_source/player/player_state_machine/states/aim.gd" id="7_pute4"]
+[ext_resource type="Script" uid="uid://b6og0vxah770y" path="res://_source/player/player_state_machine/states/slide.gd" id="8_v6at5"]
+[ext_resource type="Script" uid="uid://b4pn18u7r8qy2" path="res://_source/player/player_state_machine/states/sprint_jump.gd" id="9_gl7f6"]
+[ext_resource type="Script" uid="uid://b8efmje2ahtm3" path="res://_source/player/player_state_machine/states/vault.gd" id="9_pute4"]
+[ext_resource type="Script" uid="uid://cwhwu2fhxllyx" path="res://_source/player/player_state_machine/states/cover.gd" id="10_ax0l4"]
+[ext_resource type="Script" uid="uid://cumpwcwnfrbdf" path="res://_source/player/player_state_machine/states/sprint_fall.gd" id="10_jke86"]
+[ext_resource type="Script" uid="uid://t8a4vsmjy6t2" path="res://_source/player/player_state_machine/states/jump.gd" id="11_ax0l4"]
+[ext_resource type="Script" uid="uid://bnyqpjlc6q6pd" path="res://_source/player/player_state_machine/states/fall.gd" id="12_nojpq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ic42l"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_n7yp6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_w5kw1"]
+radius = 0.001
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3h60n"]
+margin = 0.1
+radius = 0.001
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("cam_system")]
+script = ExtResource("1_l06f1")
+cam_system = NodePath("CameraSystem")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ic42l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_n7yp6")
+
+[node name="CameraSystem" type="Node3D" parent="." node_paths=PackedStringArray("inner_arm", "outer_arm", "camera")]
+script = ExtResource("2_q5ykm")
+inner_arm = NodePath("InnerArm3D")
+outer_arm = NodePath("InnerArm3D/OuterSpringArm3D")
+camera = NodePath("InnerArm3D/OuterSpringArm3D/Camera3D")
+
+[node name="InnerArm3D" type="SpringArm3D" parent="CameraSystem"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.4, 0)
+collision_mask = 2
+shape = SubResource("SphereShape3D_w5kw1")
+spring_length = 0.9
+margin = 0.1
+
+[node name="OuterSpringArm3D" type="SpringArm3D" parent="CameraSystem/InnerArm3D"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+collision_mask = 2
+shape = SubResource("SphereShape3D_3h60n")
+spring_length = 2.0
+margin = 0.1
+
+[node name="Camera3D" type="Camera3D" parent="CameraSystem/InnerArm3D/OuterSpringArm3D"]
+current = true
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("start_state")]
+script = ExtResource("3_kol0q")
+start_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://bkmivltbklcpk"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_vxt7l")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("5_af48h")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("11_ax0l4")
+metadata/_custom_type_script = "uid://do88jhf1m81vl"
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("12_nojpq")
+metadata/_custom_type_script = "uid://do88jhf1m81vl"
+
+[node name="Sprint" type="Node" parent="StateMachine"]
+script = ExtResource("6_v6at5")
+
+[node name="SprintJump" type="Node" parent="StateMachine"]
+script = ExtResource("9_gl7f6")
+metadata/_custom_type_script = "uid://do88jhf1m81vl"
+
+[node name="SprintFall" type="Node" parent="StateMachine"]
+script = ExtResource("10_jke86")
+metadata/_custom_type_script = "uid://do88jhf1m81vl"
+
+[node name="Aim" type="Node" parent="StateMachine"]
+script = ExtResource("7_pute4")
+
+[node name="Slide" type="Node" parent="StateMachine"]
+script = ExtResource("8_v6at5")
+
+[node name="Vault" type="Node" parent="StateMachine"]
+script = ExtResource("9_pute4")
+
+[node name="Cover" type="Node" parent="StateMachine"]
+script = ExtResource("10_ax0l4")
+
+[connection signal="sprint_ended" from="StateMachine/Sprint" to="CameraSystem" method="_on_sprint_ended"]
+[connection signal="sprint_started" from="StateMachine/Sprint" to="CameraSystem" method="_on_sprint_started"]
+[connection signal="sprint_ended" from="StateMachine/SprintFall" to="CameraSystem" method="_on_sprint_ended"]

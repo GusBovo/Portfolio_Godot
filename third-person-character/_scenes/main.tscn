@@ -1,0 +1,152 @@
+[gd_scene load_steps=15 format=3 uid="uid://djljnwfoksvj4"]
+
+[ext_resource type="PackedScene" uid="uid://bxp4pj3mcm7pg" path="res://_scenes/test/test_floor.tscn" id="1_dmym1"]
+[ext_resource type="PackedScene" uid="uid://cw4uevboy5wom" path="res://_scenes/test/test_wall.tscn" id="2_3q5j6"]
+[ext_resource type="PackedScene" uid="uid://0aywpfwob1xd" path="res://_scenes/test/test_player.tscn" id="2_x6rnu"]
+[ext_resource type="PackedScene" uid="uid://bp124aippc3lf" path="res://_scenes/test/0_5_wall.tscn" id="3_ce27d"]
+[ext_resource type="PackedScene" uid="uid://losq5ei8rqc8" path="res://_scenes/test/0_25_wall.tscn" id="3_owtmn"]
+[ext_resource type="PackedScene" uid="uid://por5tyxpwcpi" path="res://_scenes/test/1_0_wall.tscn" id="4_urak4"]
+[ext_resource type="PackedScene" uid="uid://dkg6albq45pml" path="res://_scenes/test/2_5_wall.tscn" id="5_hi6yo"]
+[ext_resource type="PackedScene" uid="uid://sy7b7f3mtl5l" path="res://_scenes/test/1_5_wall.tscn" id="5_owtmn"]
+[ext_resource type="PackedScene" uid="uid://cxhb6mmc8mmo6" path="res://_scenes/test/2_0_wall.tscn" id="6_7kglf"]
+[ext_resource type="PackedScene" uid="uid://cs3mfhs8o7tru" path="res://_scenes/test/test_ramp.tscn" id="9_7kglf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_x6rnu"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_3q5j6"]
+sky_material = SubResource("ProceduralSkyMaterial_x6rnu")
+
+[sub_resource type="Environment" id="Environment_lavtb"]
+background_mode = 2
+sky = SubResource("Sky_3q5j6")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_7kglf"]
+vertices = PackedVector3Array(2.25, 0.5, -5, 6.5, 0.5, -5, 6.75, 0.5, -7.5, -8.25, 0.5, -5, -9.5, 0.5, -5, 9.5, 0.5, -29.5, -9.5, 0.5, -29.5, 9.5, 0.5, -7.5, 2.25, 0.75, -4, 0.5, 1, -4, 0.25, 0.5, -2.75, 9.5, 0.5, 9.5, 9.5, 0.5, -3.5, 6.5, 0.5, -3.75, -8.25, 0.5, -2.75, -9.5, 0.5, 9.5, 8.5, 0.75, -3.75, 8.5, 3.25, -8.5, 7.5, 3.25, -8.5, 7.5, 0.75, -3.75)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 4, 2), PackedInt32Array(2, 4, 6), PackedInt32Array(2, 6, 5), PackedInt32Array(5, 7, 2), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 13), PackedInt32Array(10, 13, 12), PackedInt32Array(10, 12, 11), PackedInt32Array(3, 14, 4), PackedInt32Array(4, 14, 15), PackedInt32Array(0, 1, 8), PackedInt32Array(8, 1, 13), PackedInt32Array(14, 10, 15), PackedInt32Array(15, 10, 11), PackedInt32Array(19, 18, 16), PackedInt32Array(16, 18, 17), PackedInt32Array(12, 13, 19), PackedInt32Array(19, 16, 12)]
+sample_partition_type = 1
+
+[node name="main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.99341005, 0.9199772, 0.85958654, 1)
+shadow_enabled = true
+directional_shadow_mode = 0
+directional_shadow_max_distance = 50.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lavtb")
+
+[node name="Test_Map" type="Node3D" parent="."]
+
+[node name="Front" type="Node3D" parent="Test_Map"]
+
+[node name="Test_Wall_1" parent="Test_Map/Front" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, -30)
+
+[node name="Test_Wall_2" parent="Test_Map/Front" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -30)
+
+[node name="Back" type="Node3D" parent="Test_Map"]
+
+[node name="Test_Wall_3" parent="Test_Map/Back" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -5, 2, 10)
+
+[node name="Test_Wall_4" parent="Test_Map/Back" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5, 2, 10)
+
+[node name="Left" type="Node3D" parent="Test_Map"]
+
+[node name="Test_Wall_7" parent="Test_Map/Left" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10, 2, -5)
+
+[node name="Test_Wall_8" parent="Test_Map/Left" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10, 2, 5)
+
+[node name="Test_Wall_9" parent="Test_Map/Left" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10, 2, -15)
+
+[node name="Test_Wall_10" parent="Test_Map/Left" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10, 2, -25)
+
+[node name="Right" type="Node3D" parent="Test_Map"]
+
+[node name="Test_Wall_5" parent="Test_Map/Right" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 2, 5)
+
+[node name="Test_Wall_6" parent="Test_Map/Right" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 2, -5)
+
+[node name="Test_Wall_7" parent="Test_Map/Right" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 2, -15)
+
+[node name="Test_Wall_8" parent="Test_Map/Right" instance=ExtResource("2_3q5j6")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 10, 2, -25)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Test_Map"]
+navigation_mesh = SubResource("NavigationMesh_7kglf")
+enabled = false
+
+[node name="Floor" type="Node3D" parent="Test_Map/NavigationRegion3D"]
+
+[node name="Test_Floor_1" parent="Test_Map/NavigationRegion3D/Floor" instance=ExtResource("1_dmym1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+
+[node name="Test_Floor_2" parent="Test_Map/NavigationRegion3D/Floor" instance=ExtResource("1_dmym1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+
+[node name="Test_Floor_3" parent="Test_Map/NavigationRegion3D/Floor" instance=ExtResource("1_dmym1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+
+[node name="Test_Floor_4" parent="Test_Map/NavigationRegion3D/Floor" instance=ExtResource("1_dmym1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
+
+[node name="Test_Floor_5" parent="Test_Map/NavigationRegion3D/Floor" instance=ExtResource("1_dmym1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -15)
+
+[node name="Test_Floor_6" parent="Test_Map/NavigationRegion3D/Floor" instance=ExtResource("1_dmym1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -15)
+
+[node name="Test_Floor_7" parent="Test_Map/NavigationRegion3D/Floor" instance=ExtResource("1_dmym1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -25)
+
+[node name="Test_Floor_8" parent="Test_Map/NavigationRegion3D/Floor" instance=ExtResource("1_dmym1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -25)
+
+[node name="Ramps" type="Node3D" parent="Test_Map/NavigationRegion3D"]
+
+[node name="test_ramp" parent="Test_Map/NavigationRegion3D/Ramps" instance=ExtResource("9_7kglf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 0, -4)
+
+[node name="test_ramp2" parent="Test_Map/NavigationRegion3D/Ramps" instance=ExtResource("9_7kglf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 1, -6)
+
+[node name="test_ramp3" parent="Test_Map/NavigationRegion3D/Ramps" instance=ExtResource("9_7kglf")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8, 2, -8)
+
+[node name="Walls" type="Node3D" parent="Test_Map/NavigationRegion3D"]
+
+[node name="0_25_Wall" parent="Test_Map/NavigationRegion3D/Walls" instance=ExtResource("3_owtmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.125, -4)
+
+[node name="0_5_Wall" parent="Test_Map/NavigationRegion3D/Walls" instance=ExtResource("3_ce27d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, -4)
+
+[node name="1_0_Wall" parent="Test_Map/NavigationRegion3D/Walls" instance=ExtResource("4_urak4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -4)
+
+[node name="1_5_Wall" parent="Test_Map/NavigationRegion3D/Walls" instance=ExtResource("5_owtmn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.75, -4)
+
+[node name="2_0_Wall" parent="Test_Map/NavigationRegion3D/Walls" instance=ExtResource("6_7kglf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -4)
+
+[node name="2_5_Wall" parent="Test_Map/NavigationRegion3D/Walls" instance=ExtResource("5_hi6yo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1.25, -4)
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("2_x6rnu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06896496, 1.1422219, -0.091566086)
