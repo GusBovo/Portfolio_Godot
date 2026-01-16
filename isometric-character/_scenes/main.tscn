@@ -1,0 +1,166 @@
+[gd_scene load_steps=25 format=3 uid="uid://2u74helnhhvr"]
+
+[ext_resource type="Script" uid="uid://c4ctkkvj06jpo" path="res://_source/enemy.gd" id="2_x6rnu"]
+[ext_resource type="PackedScene" uid="uid://0kja3h7i46s" path="res://_scenes/components/health_bar_display.tscn" id="3_6bnj4"]
+[ext_resource type="PackedScene" uid="uid://sgad4shc5wi0" path="res://_scenes/placeholders/dummy.tscn" id="4_lavtb"]
+[ext_resource type="Script" uid="uid://cgdtgmqh7ublc" path="res://_source/hurtbox.gd" id="5_6bnj4"]
+[ext_resource type="PackedScene" uid="uid://20rnwfc03mo3" path="res://_scenes/jerry.tscn" id="5_ce27d"]
+[ext_resource type="PackedScene" uid="uid://d1lbuw3ai10or" path="res://_scenes/soundwave.tscn" id="6_ce27d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dmym1"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_x6rnu"]
+sky_material = SubResource("ProceduralSkyMaterial_dmym1")
+
+[sub_resource type="Environment" id="Environment_3q5j6"]
+background_mode = 2
+sky = SubResource("Sky_x6rnu")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dmym1"]
+size = Vector3(1000, 0, 1000)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6rnu"]
+albedo_color = Color(0.26577124, 0.28520465, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sa4u1"]
+material = SubResource("StandardMaterial3D_x6rnu")
+size = Vector3(1000, 0, 1000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x6rnu"]
+size = Vector3(3, 1, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bnj4"]
+albedo_color = Color(0.3257224, 0.3217987, 0.31002805, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3q5j6"]
+material = SubResource("StandardMaterial3D_6bnj4")
+size = Vector3(3, 1, 5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x6rnu"]
+size = Vector2(3.3, 5.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3q5j6"]
+size = Vector3(3.05, 1.05, 5.05)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_x6rnu"]
+playback_mode = 2
+random_pitch = 8.77
+random_volume_offset_db = 16.63
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lavtb"]
+albedo_color = Color(0.7389137, 0, 0.05077891, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6bnj4"]
+material = SubResource("StandardMaterial3D_lavtb")
+radius = 0.3
+height = 2.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_urak4"]
+radius = 0.3
+height = 2.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ce27d"]
+top_radius = 0.3
+bottom_radius = 0.4
+height = 0.001
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_x6rnu"]
+height = 2.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ce27d"]
+height = 2.5
+radius = 0.4
+
+[node name="main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3q5j6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldMap" type="StaticBody3D" parent="."]
+
+[node name="WorldCollision" type="CollisionShape3D" parent="WorldMap"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+shape = SubResource("BoxShape3D_dmym1")
+
+[node name="WorldMesh" type="MeshInstance3D" parent="WorldMap"]
+mesh = SubResource("BoxMesh_sa4u1")
+skeleton = NodePath("")
+
+[node name="Enemy" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8545785, 1.7018802, -3.7665253)
+script = ExtResource("2_x6rnu")
+
+[node name="CollisionPolygon3D" type="CollisionShape3D" parent="Enemy"]
+shape = SubResource("BoxShape3D_x6rnu")
+
+[node name="Body" type="MeshInstance3D" parent="Enemy"]
+mesh = SubResource("BoxMesh_3q5j6")
+
+[node name="Outline" type="MeshInstance3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.405, 0)
+mesh = SubResource("PlaneMesh_x6rnu")
+
+[node name="DetectionArea" type="Area3D" parent="Enemy"]
+
+[node name="DetectionArea_Collision" type="CollisionShape3D" parent="Enemy/DetectionArea"]
+shape = SubResource("BoxShape3D_3q5j6")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_x6rnu")
+volume_db = 2.0
+autoplay = true
+
+[node name="Enemy_MegaphoneGuy" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.799692, 2.7756257, 0)
+script = ExtResource("2_x6rnu")
+
+[node name="Body" type="MeshInstance3D" parent="Enemy_MegaphoneGuy"]
+mesh = SubResource("CapsuleMesh_6bnj4")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="Enemy_MegaphoneGuy"]
+shape = SubResource("CapsuleShape3D_urak4")
+
+[node name="Outline" type="MeshInstance3D" parent="Enemy_MegaphoneGuy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.86745906, 0)
+mesh = SubResource("CylinderMesh_ce27d")
+
+[node name="DetectionArea" type="Area3D" parent="Enemy_MegaphoneGuy"]
+monitorable = false
+
+[node name="DetectionArea_Collision" type="CollisionShape3D" parent="Enemy_MegaphoneGuy/DetectionArea"]
+shape = SubResource("CylinderShape3D_x6rnu")
+debug_color = Color(0.7607843, 0.12156863, 0.16470589, 0.5058824)
+
+[node name="Hurtbox" type="Area3D" parent="Enemy_MegaphoneGuy"]
+script = ExtResource("5_6bnj4")
+metadata/_custom_type_script = "uid://cgdtgmqh7ublc"
+
+[node name="HurtboxCollision" type="CollisionShape3D" parent="Enemy_MegaphoneGuy/Hurtbox"]
+shape = SubResource("CylinderShape3D_ce27d")
+debug_color = Color(0.6313726, 0.57254905, 0, 1)
+
+[node name="HealthBarDisplay" parent="Enemy_MegaphoneGuy" instance=ExtResource("3_6bnj4")]
+transform = Transform3D(0.70710677, -0.5416752, -0.45451948, 0, 0.64278764, -0.76604444, 0.70710677, 0.5416752, 0.45451948, 0, 2.5, 0)
+
+[node name="Dummy" parent="." instance=ExtResource("4_lavtb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6893759, -10.914088)
+
+[node name="Jerry" parent="." instance=ExtResource("5_ce27d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.821723, 0)
+
+[node name="Soundwave" parent="." instance=ExtResource("6_ce27d")]
+transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, -7.471, 1.5000005, 4.364888)
+
+[connection signal="mouse_entered" from="Enemy/DetectionArea" to="Enemy" method="_on_detection_area_mouse_entered"]
+[connection signal="mouse_exited" from="Enemy/DetectionArea" to="Enemy" method="_on_detection_area_mouse_exited"]
+[connection signal="mouse_entered" from="Enemy_MegaphoneGuy/DetectionArea" to="Enemy_MegaphoneGuy" method="_on_detection_area_mouse_entered"]
+[connection signal="mouse_exited" from="Enemy_MegaphoneGuy/DetectionArea" to="Enemy_MegaphoneGuy" method="_on_detection_area_mouse_exited"]
+[connection signal="area_entered" from="Enemy_MegaphoneGuy/Hurtbox" to="Enemy_MegaphoneGuy" method="_on_hurtbox_area_entered"]

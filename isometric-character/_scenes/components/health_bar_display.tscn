@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://0kja3h7i46s"]
+
+[ext_resource type="Script" uid="uid://dj4d02iyu7m8i" path="res://_source/components/healthbardisplay.gd" id="1_sii7a"]
+[ext_resource type="Material" uid="uid://drgoc6eun4jq5" path="res://_resources/components/character_body_3d/standardmaterial_healthbar.tres" id="2_bd7ii"]
+[ext_resource type="PackedScene" uid="uid://i5y4f23d5e5o" path="res://_scenes/components/health_bar.tscn" id="2_u6slb"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bd7ii"]
+resource_local_to_scene = true
+material = ExtResource("2_bd7ii")
+
+[node name="HealthBarDisplay" type="Node3D"]
+script = ExtResource("1_sii7a")
+
+[node name="HealthBarMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_bd7ii")
+
+[node name="HeathBarViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(900, 512)
+
+[node name="HealthBar" parent="HeathBarViewport" instance=ExtResource("2_u6slb")]

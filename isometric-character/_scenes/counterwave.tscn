@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://byo03kpkw1mr4"]
+
+[ext_resource type="Script" uid="uid://caqib1ysppa80" path="res://_source/counterwave.gd" id="1_2yqkq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2yqkq"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_vf3kj"]
+material = SubResource("StandardMaterial3D_2yqkq")
+inner_radius = 1.0
+outer_radius = 1.01
+rings = 16
+ring_segments = 16
+
+[sub_resource type="Animation" id="Animation_5wvgh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2yqkq"]
+resource_name = "ring_expansion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.1, 0.1, 0.1), Vector3(3, 3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iudc3"]
+_data = {
+&"RESET": SubResource("Animation_5wvgh"),
+&"ring_expansion": SubResource("Animation_2yqkq")
+}
+
+[node name="Counterwave" type="Node3D"]
+script = ExtResource("1_2yqkq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_vf3kj")
+
+[node name="OuterArea3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="OuterArea3D"]
+depth = 0.15
+polygon = PackedVector2Array(-0.00054588914, -1.0132453, 0.39335805, -0.93712515, 0.7228781, -0.7126592, 0.93983805, -0.38320178, 1.0151615, -0.0012947004, 0.9398473, 0.38740346, 0.71780413, 0.7194881, 0.38538516, 0.9386459, -0.00032126904, 1.0149835, -0.394063, 0.9386459, -0.715485, 0.72168607, -0.9423569, 0.38794684, -1.0178968, -0.00030962005, -0.94048023, -0.38721955, -0.71914446, -0.71726, -0.3900453, -0.93765455, -0.0008004829, -1.0134206, -0.00032966584, -0.9936464, -0.3770897, -0.91437864, -0.70004106, -0.7001674, -0.91679263, -0.37817675, -0.99376607, 0.001701273, -0.9162153, 0.38090873, -0.698771, 0.7052846, -0.38243172, 0.9177009, -0.0009382963, 0.9928351, 0.38044524, 0.91877866, 0.70171696, 0.7023955, 0.91571665, 0.3793599, 0.99203616, 0.00071619265, 0.9173676, -0.38196662, 0.703983, -0.70030797, 0.38726777, -0.91647863, 0.00019314885, -0.99329156)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_iudc3")
+}
+
+[connection signal="area_entered" from="OuterArea3D" to="." method="_on_outer_area_3d_area_entered"]

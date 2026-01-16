@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=3 uid="uid://sgad4shc5wi0"]
+
+[ext_resource type="Script" uid="uid://hnod26gxwgdk" path="res://_source/classes/EnemyCB3DNode.gd" id="1_hn1fy"]
+[ext_resource type="Script" uid="uid://cgdtgmqh7ublc" path="res://_source/hurtbox.gd" id="2_h17bc"]
+[ext_resource type="PackedScene" uid="uid://0kja3h7i46s" path="res://_scenes/components/health_bar_display.tscn" id="2_ng7v2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hn1fy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t681e"]
+albedo_color = Color(2.695322e-06, 0.73861784, 0.73971045, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q4hp6"]
+material = SubResource("StandardMaterial3D_t681e")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h17bc"]
+radius = 0.7
+
+[node name="Dummy" type="CharacterBody3D"]
+script = ExtResource("1_hn1fy")
+enemy_name = "DUMMY"
+max_health = 100
+current_health = 100
+metadata/_custom_type_script = "uid://hnod26gxwgdk"
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_hn1fy")
+debug_color = Color(0.8081284, 6.988585e-05, 3.792703e-05, 1)
+
+[node name="BodyMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_q4hp6")
+skeleton = NodePath("")
+
+[node name="3D" type="Node3D" parent="."]
+
+[node name="DamageDisplayAnchor" type="Marker3D" parent="3D"]
+transform = Transform3D(0.70710677, 0.29883623, -0.6408563, 0, 0.90630776, 0.42261827, 0.70710677, -0.29883623, 0.6408563, 0.55, 0.75, 0.55)
+
+[node name="HealthBarDisplay" parent="3D" instance=ExtResource("2_ng7v2")]
+transform = Transform3D(0.70710677, -0.47771433, -0.52133375, 0, 0.73727727, -0.6755901, 0.70710677, 0.47771433, 0.52133375, 0, 2.3, 0)
+
+[node name="Hurtbox3D" type="Area3D" parent="3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_h17bc")
+
+[node name="HurtboxCollision" type="CollisionShape3D" parent="3D/Hurtbox3D"]
+shape = SubResource("CylinderShape3D_h17bc")
+
+[node name="NameLabel3D" type="Label3D" parent="3D"]
+transform = Transform3D(0.70710677, 0.5416752, -0.45451948, 0, 0.64278764, 0.76604444, 0.70710677, -0.5416752, 0.45451948, 0.4, 2.8, -0.4)
+pixel_size = 0.01
+text = "DUMMY"
+
+[node name="2D" type="Node2D" parent="."]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Generic" type="Node" parent="."]
+
+[node name="SoundwaveSpawnTimer" type="Timer" parent="Generic"]
+
+[connection signal="area_entered" from="3D/Hurtbox3D" to="." method="_on_hurtbox_3d_area_entered"]

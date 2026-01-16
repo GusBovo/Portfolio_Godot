@@ -1,0 +1,9 @@
+[gd_resource type="TorusMesh" format=3 uid="uid://t26dtw7o6tb6"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "SoundwaveMesh"
+inner_radius = 1.0
+outer_radius = 1.01
+rings = 16
+ring_segments = 16
