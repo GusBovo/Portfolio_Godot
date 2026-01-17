@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bhlprs4fy6gie"]
+
+[ext_resource type="Script" path="res://scripts/interactables/objects/Woodchest.gd" id="1_5xrny"]
+[ext_resource type="Texture2D" uid="uid://b81w6e25nme7u" path="res://assets/art/environment/placeholder/woodchest.png" id="1_14dh1"]
+[ext_resource type="Script" path="res://scripts/interactables/objects/components/RigidStaticObjectArea2D.gd" id="3_if04f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0421"]
+size = Vector2(97, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_seieq"]
+size = Vector2(101, 56)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+z_index = 4
+z_as_relative = false
+collision_layer = 8
+collision_mask = 9
+mass = 0.1
+gravity_scale = 0.5
+script = ExtResource("1_5xrny")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_14dh1")
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_m0421")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 16
+monitorable = false
+script = ExtResource("3_if04f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_seieq")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

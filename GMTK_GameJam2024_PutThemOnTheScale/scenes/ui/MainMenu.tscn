@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://7n7keppsgm18"]
+
+[ext_resource type="Script" path="res://scripts/ui/MainMenu.gd" id="1_wfjui"]
+[ext_resource type="PackedScene" uid="uid://bjnrttue02k1q" path="res://scenes/ui/OptionsMenu.tscn" id="2_ormw6"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_wfjui")
+
+[node name="MainMenuVBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 530.0
+offset_top = 230.0
+offset_right = 600.0
+offset_bottom = 331.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="MainMenuVBox"]
+layout_mode = 2
+focus_next = NodePath("../OptionsButton")
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="MainMenuVBox"]
+visible = false
+layout_mode = 2
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../StartButton")
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MainMenuVBox"]
+layout_mode = 2
+focus_previous = NodePath("../OptionsButton")
+text = "Quit"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("2_ormw6")]
+visible = false
+layout_mode = 1
+offset_right = 1112.0
+offset_bottom = 608.0
+
+[connection signal="pressed" from="MainMenuVBox/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainMenuVBox/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenuVBox/OptionsButton" to="OptionsMenu" method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenuVBox/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="hidden" from="OptionsMenu" to="." method="_on_options_menu_hidden"]

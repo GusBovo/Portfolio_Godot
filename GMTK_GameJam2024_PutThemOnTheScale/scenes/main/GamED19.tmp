@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh11y4mxrr3lm"]
+
+[ext_resource type="PackedScene" uid="uid://hhoy5hppmdtd" path="res://scenes/levels/PlaceholderMap.tscn" id="1_en0ml"]
+[ext_resource type="PackedScene" uid="uid://cxfkhwhl1ej5h" path="res://scenes/ui/PauseMenu.tscn" id="1_jwl1m"]
+[ext_resource type="PackedScene" uid="uid://di374r8myj55s" path="res://scenes/objects/player/Player.tscn" id="2_lfsv2"]
+[ext_resource type="Script" path="res://scripts/ui/DebugOverlay.gd" id="2_yir3k"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+
+[node name="CanvasOverlayLayer" type="CanvasLayer" parent="."]
+
+[node name="HUDComponents" type="Control" parent="CanvasOverlayLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Notifications" type="Control" parent="CanvasOverlayLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="CanvasOverlayLayer" instance=ExtResource("1_jwl1m")]
+process_mode = 3
+
+[node name="DebugOverlay" type="Control" parent="CanvasOverlayLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_yir3k")
+metadata/_edit_use_anchors_ = true
+
+[node name="FPSLabel" type="Label" parent="CanvasOverlayLayer/DebugOverlay"]
+layout_mode = 0
+offset_left = 1080.0
+offset_top = 11.0
+offset_right = 1145.0
+offset_bottom = 34.0
+text = "FPS: 123"
+
+[node name="PlaceholderMap" parent="." instance=ExtResource("1_en0ml")]
+
+[node name="Player" parent="." instance=ExtResource("2_lfsv2")]
+position = Vector2(620, 596)
+scale = Vector2(0.4, 0.4)

@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxfkhwhl1ej5h"]
+
+[ext_resource type="Script" path="res://scripts/ui/PauseMenu.gd" id="1_tnknk"]
+[ext_resource type="PackedScene" uid="uid://bjnrttue02k1q" path="res://scenes/ui/OptionsMenu.tscn" id="2_toggq"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tnknk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="PausedLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="PanelSpacer1" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "RESUME GAME"
+
+[node name="PanelSpacer3" type="PanelContainer" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "OPTIONS"
+
+[node name="PanelSpacer2" type="PanelContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="QuitToDesktopButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "QUIT TO DESKTOP"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("2_toggq")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -576.0
+offset_top = -322.0
+offset_right = 576.0
+offset_bottom = 324.0
+
+[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="OptionsMenu" method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitToDesktopButton" to="." method="_on_quit_to_desktop_button_pressed"]
+[connection signal="hidden" from="OptionsMenu" to="." method="_on_options_menu_hidden"]

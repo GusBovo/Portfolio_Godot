@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjnrttue02k1q"]
+
+[ext_resource type="Script" path="res://scripts/ui/OptionsMenu.gd" id="1_u5fhe"]
+[ext_resource type="PackedScene" uid="uid://pyr1dfjjlddg" path="res://scenes/ui/DebugMenu.tscn" id="2_vhhvo"]
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u5fhe")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Input" type="Control" parent="TabContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Input"]
+custom_minimum_size = Vector2(400, 370)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Input/ScrollContainer"]
+layout_mode = 2
+
+[node name="Video" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Video"]
+layout_mode = 0
+offset_right = 219.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Video/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Video/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "JACK"
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/Video/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="TabContainer/Video/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "DANIELS"
+
+[node name="Audio" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Audio"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Audio/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "A PURE"
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/Audio/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="TabContainer/Audio/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "TEST"
+
+[node name="Debug" parent="TabContainer" instance=ExtResource("2_vhhvo")]
+visible = false
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -98.0
+offset_right = 25.0
+offset_bottom = -67.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "BACK"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq6tho4667024"]
+
+[ext_resource type="Script" path="res://scripts/environment/FinishLine.gd" id="1_hb4gv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xq7t1"]
+size = Vector2(1606, 20)
+
+[node name="FinishLine" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+script = ExtResource("1_hb4gv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_xq7t1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

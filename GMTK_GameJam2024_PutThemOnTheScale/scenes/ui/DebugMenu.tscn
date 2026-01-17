@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://pyr1dfjjlddg"]
+
+[ext_resource type="Script" path="res://scripts/ui/DebugMenu.gd" id="1_3rfql"]
+
+[node name="DebugMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3rfql")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Reset" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Reset Button"
+
+[node name="DisplayFPS" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
+text = "Toggle FPS"
+
+[connection signal="pressed" from="VBoxContainer/Reset" to="." method="_on_reset_pressed"]
+[connection signal="toggled" from="VBoxContainer/DisplayFPS" to="." method="_on_display_fps_toggled"]
