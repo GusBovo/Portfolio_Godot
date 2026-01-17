@@ -22,3 +22,12 @@ Projeto para demonstrar habilidades com state machines, câmera em terceira pess
 
 Projeto para demonstrar habilidades com signals, animações básicas, câmera isométrica e UI simples.
 
+---
+
+#### GMTK 2024 GameJam - Put Them On The Scale
+*Aviso legal: Nenhum asset presente neste projeto é de minha autoria. Todos os créditos vão para os seguintes criadores: Kenney, GrafxKid e Craftpix.net*
+
+Projeto entregue à GameMaker's Toolkit GameJam 2024 - [página do itch.io - Put Them On The Scale](https://itch.io/jam/gmtk-2024/rate/2889944)
+
+*Demonstração de trabalho com objetos de física em 2D, signals, layering de assets, colisão em 2D, agrupamento e uso de área para detecção*
+![PTOTS GIF 1](./gifs/PTOTS_1.gif)
