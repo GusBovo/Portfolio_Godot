@@ -22,6 +22,9 @@ Projeto para demonstrar habilidades com state machines, câmera em terceira pess
 
 Projeto para demonstrar habilidades com signals, animações básicas, câmera isométrica e UI simples.
 
+*Demonstração de animações básicas (mesh que escala com o tempo, animação simples de ataque, etc), UI de vida funcional através de signals, câmera isométrica e controle de personagem com inputs AWSD.*
+![IC GIF 1](./gifs/ic_1.gif)
+
 ---
 
 #### GMTK 2024 GameJam - Put Them On The Scale
