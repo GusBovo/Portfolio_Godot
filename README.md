@@ -4,6 +4,13 @@ Meus Projetos em Godot
 
 ---
 
+#### Whack-A-Mole
+
+*Projeto de jogo completo de Whack-A-Mole demonstrando animações, menu básico e score com update em tempo real.*
+![Whack-A-Mole GIF](.gifs/WhackAMoleGodot.gif)
+
+---
+
 #### Third Person Character
 
 Projeto para demonstrar habilidades com state machines, câmera em terceira pessoa, controle de personagem (mover, pular, correr, mirar, etc), colisão com cenário e mais. 
