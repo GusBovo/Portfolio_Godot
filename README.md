@@ -7,7 +7,7 @@ Meus Projetos em Godot
 #### Whack-A-Mole
 
 *Projeto de jogo completo de Whack-A-Mole demonstrando animações, menu básico e score com update em tempo real.*
-![Whack-A-Mole GIF](.gifs/WhackAMoleGodot.gif)
+![Whack-A-Mole GIF](./gifs/WhackAMoleGodot.gif)
 
 ---
 
