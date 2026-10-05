@@ -1,0 +1,8 @@
+[gd_resource type="CylinderMesh" format=3 uid="uid://b06f26lslu1tj"]
+
+[ext_resource type="Material" uid="uid://flbehg6t08lg" path="res://_objects/hammer/hammer_head_material.tres" id="1_nrj7g"]
+
+[resource]
+material = ExtResource("1_nrj7g")
+top_radius = 1.0
+bottom_radius = 1.0

@@ -1,0 +1,8 @@
+[gd_resource type="CylinderMesh" format=3 uid="uid://8oy8ofdu8mcj"]
+
+[ext_resource type="Material" uid="uid://brlh4w4yiobma" path="res://_objects/hole/hole_material.tres" id="1_8nsdd"]
+
+[resource]
+material = ExtResource("1_8nsdd")
+top_radius = 1.25
+bottom_radius = 1.0

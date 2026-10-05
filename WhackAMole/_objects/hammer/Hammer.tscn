@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://sde4cwkcuamm"]
+
+[ext_resource type="Script" uid="uid://barnkf6f3wx7a" path="res://_objects/hammer/hammer.gd" id="1_co3s7"]
+[ext_resource type="CylinderMesh" uid="uid://b06f26lslu1tj" path="res://_objects/hammer/hammer_head_mesh.tres" id="1_tf4nl"]
+[ext_resource type="CylinderMesh" uid="uid://022f16nh44xp" path="res://_objects/hammer/hammer_body_mesh.tres" id="2_5y076"]
+[ext_resource type="Shape3D" uid="uid://dy0csrsm3k5e7" path="res://_objects/hammer/hammer_col_shape_3d.tres" id="3_5y076"]
+
+[sub_resource type="Animation" id="Animation_co3s7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HammerHead:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HammerHead:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o241q"]
+resource_name = "at_ready"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0009999999),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HammerHead:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0009999999),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 2.5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HammerHead:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0009999999),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.3577925, 0, -0.2617994)]
+}
+
+[sub_resource type="Animation" id="Animation_7qsm1"]
+resource_name = "hammering"
+length = 0.33333334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22140826, 0.25257578),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HammerHead:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.23333333, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 2.5, 0), Vector3(0, 2.4, 0), Vector3(0, 4.25, 0.995), Vector3(0, 0, 0), Vector3(0, 2.5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HammerHead:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.23333333, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.3577925, 0, -0.2617994), Vector3(0.3577925, 0, -0.21816616), Vector3(0.61086524, 0, -0.04363323), Vector3(0, 0, 0), Vector3(0.3577925, 0, -0.2617994)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7qsm1"]
+_data = {
+&"RESET": SubResource("Animation_co3s7"),
+&"at_ready": SubResource("Animation_o241q"),
+&"hammering": SubResource("Animation_7qsm1")
+}
+
+[node name="Hammer" type="Area3D" unique_id=1710297918]
+script = ExtResource("1_co3s7")
+
+[node name="HammerHead" type="MeshInstance3D" parent="." unique_id=441869368]
+mesh = ExtResource("1_tf4nl")
+
+[node name="HammerBody" type="MeshInstance3D" parent="HammerHead" unique_id=1852124356]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 2.2094927)
+mesh = ExtResource("2_5y076")
+
+[node name="HammerCollision" type="CollisionShape3D" parent="." unique_id=1412190145]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7438053, 0)
+shape = ExtResource("3_5y076")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1426500731]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_7qsm1")

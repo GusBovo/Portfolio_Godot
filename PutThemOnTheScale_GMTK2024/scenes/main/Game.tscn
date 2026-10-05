@@ -1,0 +1,194 @@
+[gd_scene load_steps=16 format=3 uid="uid://dh11y4mxrr3lm"]
+
+[ext_resource type="PackedScene" uid="uid://cxfkhwhl1ej5h" path="res://scenes/ui/PauseMenu.tscn" id="1_jwl1m"]
+[ext_resource type="Script" path="res://scripts/ui/ScaleDigitalDisplayLabel.gd" id="1_sawgl"]
+[ext_resource type="Script" path="res://scripts/main/CameraRaycast2D.gd" id="1_ta10b"]
+[ext_resource type="PackedScene" uid="uid://bdg77x23vudji" path="res://scenes/levels/Map.tscn" id="5_6pghk"]
+[ext_resource type="PackedScene" uid="uid://smmve0ssppdd" path="res://scenes/objects/environment/Scale.tscn" id="5_t6n6g"]
+[ext_resource type="FontFile" uid="uid://cemicc60havk2" path="res://assets/font/Static.ttf" id="6_21tpb"]
+[ext_resource type="Script" path="res://scripts/main/MapArea2D.gd" id="6_aa6c4"]
+[ext_resource type="Script" path="res://scripts/ui/GameFinishedRichTextLabel.gd" id="7_sudxr"]
+[ext_resource type="PackedScene" uid="uid://dxl8lupidcb8h" path="res://scenes/objects/environment/SpawnerArea2D.tscn" id="8_65pmg"]
+[ext_resource type="Script" path="res://scripts/environment/SpawnerArea2DBottomRight.gd" id="8_uxwk2"]
+[ext_resource type="PackedScene" uid="uid://dq6tho4667024" path="res://scenes/objects/environment/FinishLine.tscn" id="9_ucojo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ywyu"]
+size = Vector2(153, 4027.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cuisd"]
+size = Vector2(110, 4030)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj300"]
+size = Vector2(5196, 304)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00t3x"]
+size = Vector2(5182, 38)
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(580, 321)
+
+[node name="RayCast2D" type="RayCast2D" parent="Camera2D"]
+position = Vector2(-2, -118)
+collision_mask = 16
+script = ExtResource("1_ta10b")
+
+[node name="GameMap" parent="." instance=ExtResource("5_6pghk")]
+position = Vector2(576, -104)
+
+[node name="Despawner" type="Area2D" parent="GameMap"]
+collision_mask = 31
+monitorable = false
+script = ExtResource("6_aa6c4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GameMap/Despawner"]
+position = Vector2(-2550, -531.75)
+shape = SubResource("RectangleShape2D_8ywyu")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="GameMap/Despawner"]
+position = Vector2(2494, -530)
+shape = SubResource("RectangleShape2D_cuisd")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="GameMap/Despawner"]
+position = Vector2(-44, -2704)
+shape = SubResource("RectangleShape2D_rj300")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GameMap"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMap/StaticBody2D"]
+position = Vector2(-35, 1511)
+shape = SubResource("RectangleShape2D_00t3x")
+
+[node name="ColorRect" type="ColorRect" parent="GameMap"]
+z_index = 15
+z_as_relative = false
+custom_minimum_size = Vector2(4000, 4000)
+offset_left = -5148.0
+offset_top = -2470.0
+offset_right = -1148.0
+offset_bottom = 1530.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="GameMap"]
+z_index = 15
+z_as_relative = false
+custom_minimum_size = Vector2(4000, 4000)
+offset_left = 1152.0
+offset_top = -2470.0
+offset_right = 5152.0
+offset_bottom = 1530.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="GameMap"]
+custom_minimum_size = Vector2(11000, 3000)
+offset_left = -5534.0
+offset_top = -4500.0
+offset_right = 5466.0
+offset_bottom = -1500.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="GameMap"]
+z_index = 15
+z_as_relative = false
+custom_minimum_size = Vector2(10500, 3000)
+offset_left = -5284.0
+offset_top = 1528.0
+offset_right = 5216.0
+offset_bottom = 4528.0
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasOverlayLayer" type="CanvasLayer" parent="GameMap"]
+
+[node name="HUDComponents" type="Control" parent="GameMap/CanvasOverlayLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="GameMap/CanvasOverlayLayer/HUDComponents"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 52.0
+offset_right = 104.0
+offset_bottom = 75.0
+script = ExtResource("1_sawgl")
+
+[node name="Notifications" type="Control" parent="GameMap/CanvasOverlayLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="GameMap/CanvasOverlayLayer" instance=ExtResource("1_jwl1m")]
+process_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="GameMap/CanvasOverlayLayer"]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.0
+offset_top = -298.0
+offset_right = 162.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.145098, 0.301961, 0.498039, 0.929412)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="GameMap/CanvasOverlayLayer/ColorRect"]
+texture_filter = 1
+layout_mode = 0
+offset_top = 50.0
+offset_right = 300.0
+offset_bottom = 350.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("6_21tpb")
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center]CONGRATULATIONS!
+
+YOU HAVE REACHED THE MOON![/center]"
+scroll_active = false
+script = ExtResource("7_sudxr")
+
+[node name="Button" type="Button" parent="GameMap/CanvasOverlayLayer/ColorRect"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -104.0
+offset_top = 20.0
+offset_right = 104.0
+offset_bottom = 53.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("6_21tpb")
+theme_override_font_sizes/font_size = 20
+text = "RESTART THE GAME"
+
+[node name="Scale" parent="." instance=ExtResource("5_t6n6g")]
+position = Vector2(578, 420)
+scale = Vector2(0.5, 0.5)
+
+[node name="SpawnerArea2D" parent="." instance=ExtResource("8_65pmg")]
+position = Vector2(-353, 510)
+
+[node name="SpawnerArea2D2" parent="." instance=ExtResource("8_65pmg")]
+position = Vector2(1486, 511)
+script = ExtResource("8_uxwk2")
+is_right_spawner = true
+
+[node name="FinishLine" parent="." instance=ExtResource("9_ucojo")]
+position = Vector2(580, -477)
+
+[connection signal="body_entered" from="GameMap/Despawner" to="GameMap/Despawner" method="_on_body_entered"]

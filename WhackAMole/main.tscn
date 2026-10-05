@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://b7if0tsnkd8bn"]
+
+[ext_resource type="CylinderMesh" uid="uid://8oy8ofdu8mcj" path="res://_objects/hole/hole_mesh.tres" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://rb8l0aobtb0y" path="res://_objects/targets/target1/Target1.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://sde4cwkcuamm" path="res://_objects/hammer/Hammer.tscn" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://2ee3x454sb6k" path="res://_ui/score_number.gd" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://b3ci1f02mcwe4" path="res://_ui/game_ui.gd" id="4_272bh"]
+[ext_resource type="Script" uid="uid://b5ep2sfibqosy" path="res://_ui/game_time_bar.gd" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://dkb08ghbesfd" path="res://_ui/game_menu_and_gameover_ui.gd" id="6_7mycd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_i210l"]
+size = Vector3(10, 0.5, 10)
+
+[node name="Main" type="Node3D" unique_id=1591999790]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1331263794]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1965068610]
+transform = Transform3D(-0.76604444, -0.4924039, -0.41317594, 0, -0.64278764, 0.76604444, -0.64278764, 0.58682406, 0.4924039, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MainTable" type="MeshInstance3D" parent="." unique_id=1910069114]
+mesh = SubResource("BoxMesh_i210l")
+
+[node name="Hole1" type="MeshInstance3D" parent="MainTable" unique_id=162032757]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
+mesh = ExtResource("1_ig7tw")
+
+[node name="Hole2" type="MeshInstance3D" parent="MainTable" unique_id=1685965995]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+mesh = ExtResource("1_ig7tw")
+
+[node name="Hole3" type="MeshInstance3D" parent="MainTable" unique_id=1459542048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
+mesh = ExtResource("1_ig7tw")
+
+[node name="Hole4" type="MeshInstance3D" parent="MainTable" unique_id=1212434706]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+mesh = ExtResource("1_ig7tw")
+
+[node name="Hole5" type="MeshInstance3D" parent="MainTable" unique_id=362986294]
+mesh = ExtResource("1_ig7tw")
+
+[node name="Hole6" type="MeshInstance3D" parent="MainTable" unique_id=854751536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+mesh = ExtResource("1_ig7tw")
+
+[node name="Hole7" type="MeshInstance3D" parent="MainTable" unique_id=177167422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
+mesh = ExtResource("1_ig7tw")
+
+[node name="Hole8" type="MeshInstance3D" parent="MainTable" unique_id=2111756427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+mesh = ExtResource("1_ig7tw")
+
+[node name="Hole9" type="MeshInstance3D" parent="MainTable" unique_id=204179058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+mesh = ExtResource("1_ig7tw")
+
+[node name="Hammer" parent="." unique_id=1710297918 instance=ExtResource("3_h2yge")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1.85, 0)
+
+[node name="Targets" type="Node3D" parent="." unique_id=1852502101]
+
+[node name="Target1" parent="Targets" unique_id=1432987320 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3)
+
+[node name="Target2" parent="Targets" unique_id=2022122438 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="Target3" parent="Targets" unique_id=1629324859 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -3)
+
+[node name="Target4" parent="Targets" unique_id=1475770720 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="Target5" parent="Targets" unique_id=1936224031 instance=ExtResource("2_0xm2m")]
+
+[node name="Target6" parent="Targets" unique_id=1528861700 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="Target7" parent="Targets" unique_id=1653782843 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 3)
+
+[node name="Target8" parent="Targets" unique_id=767463895 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Target9" parent="Targets" unique_id=190265026 instance=ExtResource("2_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="MainCam" type="Camera3D" parent="." unique_id=774794000]
+transform = Transform3D(1, 0, 0, 0, 0.42261824, 0.9063078, 0, -0.9063078, 0.42261824, 0, 8.5, 4.75)
+current = true
+fov = 60.0
+
+[node name="TestCam" type="Camera3D" parent="." unique_id=532190223]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8932481, 7.7754416)
+
+[node name="UI" type="Control" parent="." unique_id=942109320]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameUI" type="Control" parent="UI" unique_id=2020118992]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_272bh")
+
+[node name="ScoreColoredBackground" type="ColorRect" parent="UI/GameUI" unique_id=70112829]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 526.0
+offset_top = 556.0
+offset_right = 623.0
+offset_bottom = 631.0
+color = Color(0.24313726, 0.24313726, 0.24313726, 0.78431374)
+
+[node name="Score" type="Label" parent="UI/GameUI" unique_id=1890081161]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 351.0
+offset_top = 560.0
+offset_right = 801.0
+offset_bottom = 585.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+text = "SCORE"
+horizontal_alignment = 1
+
+[node name="ScoreNumber" type="Label" parent="UI/GameUI" unique_id=2016014894]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 525.0
+offset_top = 580.0
+offset_right = 625.0
+offset_bottom = 630.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 35
+text = "9999"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_1bvp3")
+
+[node name="GameTimeBar" type="ProgressBar" parent="UI/GameUI" unique_id=306103113]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 411.0
+offset_top = 22.0
+offset_right = 766.0
+offset_bottom = 49.0
+value = 50.0
+show_percentage = false
+script = ExtResource("5_lquwl")
+
+[node name="GameTimeLabel" type="Label" parent="UI/GameUI/GameTimeBar" unique_id=959963086]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = -1.0
+offset_right = 355.0
+offset_bottom = 26.0
+text = "5:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameMenuAndGameOverUI" type="Control" parent="UI" unique_id=175120882]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_7mycd")
+
+[node name="PlayButton" type="Button" parent="UI/GameMenuAndGameOverUI" unique_id=672014450]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 418.0
+offset_top = 369.0
+offset_right = 529.0
+offset_bottom = 431.0
+text = "PLAY"
+
+[node name="CloseButton" type="Button" parent="UI/GameMenuAndGameOverUI" unique_id=1653165918]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 657.0
+offset_top = 369.0
+offset_right = 768.0
+offset_bottom = 431.0
+text = "CLOSE
+"
+
+[node name="FinalScore" type="Label" parent="UI/GameMenuAndGameOverUI" unique_id=590930245]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 538.0
+offset_top = 181.0
+offset_right = 639.0
+offset_bottom = 204.0
+text = "FINAL SCORE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinalScoreNumber" type="Label" parent="UI/GameMenuAndGameOverUI" unique_id=1230949737]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 543.0
+offset_top = 211.0
+offset_right = 632.0
+offset_bottom = 275.0
+theme_override_font_sizes/font_size = 36
+text = "9999"
+horizontal_alignment = 1
+vertical_alignment = 1

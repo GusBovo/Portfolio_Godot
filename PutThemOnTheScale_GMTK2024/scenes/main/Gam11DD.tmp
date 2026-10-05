@@ -1,0 +1,124 @@
+[gd_scene load_steps=16 format=3 uid="uid://dh11y4mxrr3lm"]
+
+[ext_resource type="PackedScene" uid="uid://cxfkhwhl1ej5h" path="res://scenes/ui/PauseMenu.tscn" id="1_jwl1m"]
+[ext_resource type="Script" path="res://scripts/ui/ScaleDigitalDisplayLabel.gd" id="1_sawgl"]
+[ext_resource type="Script" path="res://scripts/ui/DebugOverlay.gd" id="2_yir3k"]
+[ext_resource type="PackedScene" uid="uid://cm5cu6uv2b3vq" path="res://scenes/objects/interactables/NPCMan.tscn" id="3_qofqb"]
+[ext_resource type="PackedScene" uid="uid://bdg77x23vudji" path="res://scenes/levels/Map.tscn" id="5_6pghk"]
+[ext_resource type="PackedScene" uid="uid://smmve0ssppdd" path="res://scenes/objects/environment/Scale.tscn" id="5_t6n6g"]
+[ext_resource type="Script" path="res://scripts/main/MapArea2D.gd" id="6_aa6c4"]
+[ext_resource type="PackedScene" uid="uid://bhlprs4fy6gie" path="res://scenes/objects/interactables/Woodchest.tscn" id="6_ee277"]
+[ext_resource type="PackedScene" uid="uid://dxl8lupidcb8h" path="res://scenes/objects/environment/SpawnerArea2D.tscn" id="8_65pmg"]
+[ext_resource type="PackedScene" uid="uid://bcplo16ox6mb3" path="res://scenes/objects/interactables/VehicleOne.tscn" id="9_oy56m"]
+[ext_resource type="PackedScene" uid="uid://dq6tho4667024" path="res://scenes/objects/environment/FinishLine.tscn" id="9_ucojo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ywyu"]
+size = Vector2(153, 4027.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cuisd"]
+size = Vector2(110, 4030)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rj300"]
+size = Vector2(5196, 304)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00t3x"]
+size = Vector2(5182, 38)
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(574, 329)
+
+[node name="CanvasOverlayLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="HUDComponents" type="Control" parent="Camera2D/CanvasOverlayLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Camera2D/CanvasOverlayLayer/HUDComponents"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 52.0
+offset_right = 104.0
+offset_bottom = 75.0
+script = ExtResource("1_sawgl")
+
+[node name="Notifications" type="Control" parent="Camera2D/CanvasOverlayLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="Camera2D/CanvasOverlayLayer" instance=ExtResource("1_jwl1m")]
+process_mode = 3
+
+[node name="DebugOverlay" type="Control" parent="Camera2D/CanvasOverlayLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_yir3k")
+metadata/_edit_use_anchors_ = true
+
+[node name="FPSLabel" type="Label" parent="Camera2D/CanvasOverlayLayer/DebugOverlay"]
+layout_mode = 0
+offset_left = 1080.0
+offset_top = 11.0
+offset_right = 1145.0
+offset_bottom = 34.0
+text = "FPS: 123"
+
+[node name="GameMap" parent="." instance=ExtResource("5_6pghk")]
+position = Vector2(576, -104)
+
+[node name="Despawner" type="Area2D" parent="GameMap"]
+collision_mask = 31
+monitorable = false
+script = ExtResource("6_aa6c4")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="GameMap/Despawner"]
+position = Vector2(-2550, -531.75)
+shape = SubResource("RectangleShape2D_8ywyu")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="GameMap/Despawner"]
+position = Vector2(2494, -530)
+shape = SubResource("RectangleShape2D_cuisd")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="GameMap/Despawner"]
+position = Vector2(-44, -2704)
+shape = SubResource("RectangleShape2D_rj300")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="GameMap"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameMap/StaticBody2D"]
+position = Vector2(-35, 1511)
+shape = SubResource("RectangleShape2D_00t3x")
+
+[node name="Scale" parent="." instance=ExtResource("5_t6n6g")]
+position = Vector2(578, 420)
+scale = Vector2(0.5, 0.5)
+
+[node name="SpawnerArea2D" parent="." instance=ExtResource("8_65pmg")]
+position = Vector2(-353, 510)
+
+[node name="Woodchest" parent="." instance=ExtResource("6_ee277")]
+position = Vector2(367, 523)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("9_oy56m")]
+position = Vector2(192, 608)
+
+[node name="Woodchest2" parent="." instance=ExtResource("6_ee277")]
+position = Vector2(982, 488)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_qofqb")]
+position = Vector2(115, 542)
+
+[node name="FinishLine" parent="." instance=ExtResource("9_ucojo")]
+visible = false
+position = Vector2(578, 369)
+
+[connection signal="body_entered" from="GameMap/Despawner" to="GameMap/Despawner" method="_on_body_entered"]

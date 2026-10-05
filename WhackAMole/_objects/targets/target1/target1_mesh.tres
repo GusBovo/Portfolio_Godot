@@ -1,0 +1,6 @@
+[gd_resource type="CapsuleMesh" format=3 uid="uid://c6mbroawxnmnc"]
+
+[ext_resource type="Material" uid="uid://cr2k1he51154l" path="res://_objects/targets/target1/target1_material.tres" id="1_qk037"]
+
+[resource]
+material = ExtResource("1_qk037")

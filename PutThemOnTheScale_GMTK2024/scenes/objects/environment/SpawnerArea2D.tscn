@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxl8lupidcb8h"]
+
+[ext_resource type="Script" path="res://scripts/environment/SpawnerArea2D.gd" id="1_el0p3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sgma8"]
+
+[node name="SpawnerArea2D" type="Area2D"]
+monitoring = false
+monitorable = false
+script = ExtResource("1_el0p3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sgma8")

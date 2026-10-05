@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbu7op8r2dsq8"]
+
+[ext_resource type="Script" path="res://scripts/interactables/templates/TemplateObject.gd" id="1_r68r8"]
+
+[node name="RigidBody2D" type="RigidBody2D"]
+mass = 0.05
+script = ExtResource("1_r68r8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-47, 27, -28, 27, 0, 27, 29, 27, 46, 27, 46, -23, -47, -23)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

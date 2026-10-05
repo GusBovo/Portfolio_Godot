@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://yjifue14ylse"]
+
+[ext_resource type="Script" path="res://scripts/ui/GameLoading.gd" id="1_vcsrw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_agf6p"]
+bg_color = Color(0.868862, 0.859686, 0.841592, 1)
+
+[node name="GameLoading" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vcsrw")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(500, 25)
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 27.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_agf6p")
